@@ -10,7 +10,7 @@ db.init_app(app)
 CORS(app)
 Migrate(app, db)
 
-    
+
 
 
 
