@@ -9,8 +9,7 @@ class User(db.Model):
     name = db.Column(db.String(50), nullable=False, unique=False)
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(50), nullable=False, unique=False)
-    is_active = db.Column(db.Boolean(), default=True,
-                          nullable=False, unique=False)
+    is_active = db.Column(db.Boolean(), default=True, nullable=False, unique=False)
 
     def __repr__(self):
         return '<User %r>' % self.email
@@ -56,12 +55,12 @@ class Text_FirstSection(db.Model):
     mainDescription = db.Column(db.String(200))
 
     def __repr__(self):
-        return '<User %r>' % self.user_id
+        return '<Text_FirstSection %r>' % self.id
 
     def serialize(self):
         return {
             "id": self.id,
-            "er_idus": self.user_id,
+            "user_id": self.user_id,
             "mainTitle": self.mainTitle,
             "mainDescription": self.mainDescription
         }

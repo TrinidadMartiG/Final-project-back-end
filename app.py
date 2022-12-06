@@ -55,7 +55,7 @@ def send_data_firstsection():
 def update_data_firstsection(user=None):
     if user is not None:
         print(user)
-        text_firstsection = Text_FirstSection.query.filter_by(user_id=user)
+        text_firstsection = Text_FirstSection.query.filter_by(user_id=user).all()
         print(text_firstsection)
         text_firstsection.mainTitle = request.json.get("mainTitle")
         text_firstsection.mainDescription = request.json.get("mainDescription")
@@ -63,15 +63,19 @@ def update_data_firstsection(user=None):
         return 'data updated', 202
 
 
-@app.route("/get_data_firstsection", methods=["GET"])
-def get_data_firstsection():
-    all_data = Text_FirstSection.query.all()
-    serialize_list = list(
-        map(lambda text_firstsection: text_firstsection.serialize(), all_data))
-    response_body = {
-        "msg":  "Get /data response was successful"
-    }
-    return jsonify(serialize_list), 201
+@app.route("/get_data_firstsection/<int:user>", methods=["GET"])
+def get_data_firstsection(user=None):
+    if user is not None:
+        text_firstsection = Text_FirstSection.query.filter_by(user_id=user).first()
+        #serialize_list = list(
+            #map(lambda text_firstsection: text_firstsection.serialize(), all_data))
+       # response_body = {
+        #    "msg":  "Get /data response was successful"
+        #}
+        print(text_firstsection)
+        serializer = text_firstsection.serialize()
+        print(serializer)
+        return (serializer), 201
 
 
 if __name__ == "__main__":
