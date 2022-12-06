@@ -15,6 +15,9 @@ Migrate(app, db)
 def hello():
     return "Hello World!"
 
+@app.route("/login", methods=['POST'])
+def login():
+    return jsonify(serialize_list), 201
 
 @app.route("/users", methods=['GET'])
 def get_all_users():
@@ -25,6 +28,7 @@ def get_all_users():
     }
 
     return jsonify(serialize_list), 201
+
 
 
 @app.route("/create_user", methods=["POST"])
@@ -63,20 +67,65 @@ def update_data_firstsection(user=None):
         return 'data updated', 202
 
 
-@app.route("/get_data_firstsection/<int:user>", methods=["GET"])
-def get_data_firstsection(user=None):
-    if user is not None:
-        text_firstsection = Text_FirstSection.query.filter_by(user_id=user).first()
-        #serialize_list = list(
-            #map(lambda text_firstsection: text_firstsection.serialize(), all_data))
-       # response_body = {
-        #    "msg":  "Get /data response was successful"
-        #}
-        print(text_firstsection)
-        serializer = text_firstsection.serialize()
-        print(serializer)
-        return (serializer), 201
+@app.route("/get_data_firstsection", methods=["GET"])
+def get_data_firstsection():
+        text_firstsection = Text_FirstSection.query.all()
+        serialize_list = list(map(lambda text_firstsection: text_firstsection.serialize(), text_firstsection))
+        response_body = {
+            "msg":  "Get /data response was successful"
+        }
+        return jsonify(serialize_list), 201
 
+@app.route("/data_firstsection/<int:user>", methods=["GET"])
+def data_firstsection_byID(user=None):
+        text_firstsection = Text_FirstSection.query.filter_by(user_id=user).all()
+        #Text_FirstSection.query.filter_by(user_id=user).all()
+        serialize_list = list(map(lambda text_firstsection: text_firstsection.serialize(), text_firstsection))
+        return jsonify(serialize_list), 201
+
+
+##routes secondSection##
+@app.route("/send_data_secondsection", methods=["POST"])
+def send_data_secondsection():
+    data = Text_SecondSection()
+    data.id = request.json.get("id")
+    data.user_id = request.json.get("user_id")
+    data.secondSection_MainTitle = request.json.get("secondSection_MainTitle")
+    data.secondSection_Description = request.json.get("secondSection_Description")
+    data.secondSection_ConceptOne = request.json.get("secondSection_ConceptOne")
+    data.secondSection_ConceptTwo = request.json.get("secondSection_ConceptTwo")
+    data.secondSection_ConceptThree = request.json.get("secondSection_ConceptThree")
+    data.secondSection_ConceptFour = request.json.get("secondSection_ConceptFour")
+    data.secondSection_ConceptFive = request.json.get("secondSection_ConceptFive")
+    data.secondSection_ConceptSix = request.json.get("secondSection_ConceptSix")
+    db.session.add(data)
+    db.session.commit()
+    return 'data sended', 202
+
+@app.route("/update_data_secondsection/<int:user>", methods=["PUT"])
+def update_data_secondsection(user=None):
+    if user is not None:
+        print(user)
+        data = Text_SecondSection.query.filter_by(user_id=user).all()
+        data.secondSection_MainTitle = request.json.get("secondSection_MainTitle")
+        data.secondSection_Description = request.json.get("secondSection_Description")
+        data.secondSection_ConceptOne = request.json.get("secondSection_ConceptOne")
+        data.secondSection_ConceptTwo = request.json.get("secondSection_ConceptTwo")
+        data.secondSection_ConceptThree = request.json.get("secondSection_ConceptThree")
+        data.secondSection_ConceptFour = request.json.get("secondSection_ConceptFour")
+        data.secondSection_ConceptFive = request.json.get("secondSection_ConceptFive")
+        data.secondSection_ConceptSix = request.json.get("secondSection_ConceptSix")
+        db.session.commit()
+        return 'data updated', 202
+
+@app.route("/get_data_secondsection", methods=["GET"])
+def get_data_secondsection():
+        data = Text_SecondSection.query.all()
+        serialize_list = list(map(lambda data: data.serialize(), data))
+        response_body = {
+            "msg":  "Get /data response was successful"
+        }
+        return jsonify(serialize_list), 201
 
 if __name__ == "__main__":
     app.run(host="localhost", port=8080, debug=True)

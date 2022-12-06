@@ -51,8 +51,8 @@ class Text_FirstSection(db.Model):
     __tablename__ = "text_firstsection"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    mainTitle = db.Column(db.String(200))
-    mainDescription = db.Column(db.String(200))
+    mainTitle = db.Column(db.String(200), unique=True)
+    mainDescription = db.Column(db.String(200), unique=True)
 
     def __repr__(self):
         return '<Text_FirstSection %r>' % self.id
@@ -80,7 +80,7 @@ class Text_SecondSection(db.Model):
     secondSection_ConceptSix = db.Column(db.String(200))
 
     def __repr__(self):
-        return '<User %r>' % self.user_id
+        return '<Text_SecondSection %r>' % self.id
 
     def serialize(self):
         return {
