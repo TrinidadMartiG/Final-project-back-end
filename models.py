@@ -29,9 +29,9 @@ class Media(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     mainTitleVideo = db.Column(db.String(500))
-    thirdSectionLeftConceptOneImg = db.Column(db.String(500))
-    thirdSectionRightConceptTwoImg = db.Column(db.String(500))
-    thirdSectionLeftConceptThreeImg = db.Column(db.String(500))
+    thirdSectionLeftConceptOneImg = db.Column(db.String(), unique=True)
+    thirdSectionRightConceptTwoImg = db.Column(db.String(), unique=True)
+    thirdSectionLeftConceptThreeImg = db.Column(db.String(), unique=True)
 
     def __repr__(self):
         return '<User %r>' % self.user_id
@@ -70,14 +70,14 @@ class Text_SecondSection(db.Model):
     __tablename__ = "text_secondsection"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    secondSection_MainTitle = db.Column(db.String(200))
-    secondSection_Description = db.Column(db.String(200))
-    secondSection_ConceptOne = db.Column(db.String(200))
-    secondSection_ConceptTwo = db.Column(db.String(200))
-    secondSection_ConceptThree = db.Column(db.String(200))
-    secondSection_ConceptFour = db.Column(db.String(200))
-    secondSection_ConceptFive = db.Column(db.String(200))
-    secondSection_ConceptSix = db.Column(db.String(200))
+    secondSection_MainTitle = db.Column(db.String(200), unique=True)
+    secondSection_Description = db.Column(db.String(200), unique=True)
+    secondSection_ConceptOne = db.Column(db.String(200), unique=True)
+    secondSection_ConceptTwo = db.Column(db.String(200), unique=True)
+    secondSection_ConceptThree = db.Column(db.String(200), unique=True)
+    secondSection_ConceptFour = db.Column(db.String(200), unique=True)
+    secondSection_ConceptFive = db.Column(db.String(200), unique=True)
+    secondSection_ConceptSix = db.Column(db.String(200), unique=True)
 
     def __repr__(self):
         return '<Text_SecondSection %r>' % self.id
@@ -100,17 +100,17 @@ class Text_ThirdSection(db.Model):
     __tablename__ = "text_thirdsection"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    thirdSection_MainTitle = db.Column(db.String(200))
-    thirdSection_Description = db.Column(db.String(200))
-    thirdSection_LeftConceptOne_BlueHighlightText = db.Column(db.String(200))
-    thirdSection_LeftConceptOne_Title = db.Column(db.String(200))
-    thirdSection_LeftConceptOne_Description = db.Column(db.String(200))
-    thirdSection_RightConceptTwo_BlueHighlightText = db.Column(db.String(200))
-    thirdSection_RightConceptTwo_Title = db.Column(db.String(200))
-    thirdSection_RightConceptTwo_Description = db.Column(db.String(200))
-    thirdSection_LeftConceptThree_BlueHighlightText = db.Column(db.String(200))
-    thirdSection_LeftConceptThree_Title = db.Column(db.String(200))
-    thirdSection_LefttConceptThree_Description = db.Column(db.String(200))
+    thirdSection_MainTitle = db.Column(db.String(200), unique=True)
+    thirdSection_Description = db.Column(db.String(200), unique=True)
+    thirdSection_LeftConceptOne_BlueHighlightText = db.Column(db.String(200), unique=True)
+    thirdSection_LeftConceptOne_Title = db.Column(db.String(200), unique=True)
+    thirdSection_LeftConceptOne_Description = db.Column(db.String(200), unique=True)
+    thirdSection_RightConceptTwo_BlueHighlightText = db.Column(db.String(200), unique=True)
+    thirdSection_RightConceptTwo_Title = db.Column(db.String(200), unique=True)
+    thirdSection_RightConceptTwo_Description = db.Column(db.String(200), unique=True)
+    thirdSection_LeftConceptThree_BlueHighlightText = db.Column(db.String(200), unique=True)
+    thirdSection_LeftConceptThree_Title = db.Column(db.String(200), unique=True)
+    thirdSection_LefttConceptThree_Description = db.Column(db.String(200), unique=True)
 
     def __repr__(self):
         return '<User %r>' % self.user_id
@@ -136,14 +136,14 @@ class Text_FourthSection(db.Model):
     __tablename__ = "text_fourthsection"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    fourthSection_TestimonialsMainTitle = db.Column(db.String(200))
-    fourthSection_TestimonialsDescription = db.Column(db.String(200))
-    fourthSection_CardOneText = db.Column(db.String(200))
-    fourthSection_CardOne_Person = db.Column(db.String(200))
-    fourthSection_CardTwoText = db.Column(db.String(200))
-    fourthSection_CardTwo_Person = db.Column(db.String(200))
-    fourthSection_CardThreeText = db.Column(db.String(200))
-    fourthSection_CardThree_Person = db.Column(db.String(200))
+     = db.Column(db.String(200), unique=True)
+     = db.Column(db.String(200), unique=True)
+     = db.Column(db.String(200), unique=True)
+    = db.Column(db.String(200), unique=True)
+     = db.Column(db.String(200), unique=True)
+     = db.Column(db.String(200), unique=True)
+     = db.Column(db.String(200), unique=True)
+     = db.Column(db.String(200), unique=True)
 
     def __repr__(self):
         return '<User %r>' % self.user_id
