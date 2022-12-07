@@ -10,7 +10,7 @@ class User(db.Model):
     email = db.Column(db.String(100), nullable=False, unique=True)
     password = db.Column(db.String(50), nullable=False, unique=False)
     is_active = db.Column(db.Boolean(), default=True, nullable=False, unique=False)
-
+    
     def __repr__(self):
         return '<User %r>' % self.email
 
@@ -136,14 +136,14 @@ class Text_FourthSection(db.Model):
     __tablename__ = "text_fourthsection"
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-     = db.Column(db.String(200), unique=True)
-     = db.Column(db.String(200), unique=True)
-     = db.Column(db.String(200), unique=True)
-    = db.Column(db.String(200), unique=True)
-     = db.Column(db.String(200), unique=True)
-     = db.Column(db.String(200), unique=True)
-     = db.Column(db.String(200), unique=True)
-     = db.Column(db.String(200), unique=True)
+    fourthSection_TestimonialsMainTitle =db.Column(db.String(200), unique=True)
+    fourthSection_TestimonialsDescription = db.Column(db.String(200), unique=True)
+    fourthSection_CardOneText = db.Column(db.String(200), unique=True)
+    fourthSection_CardOne_Person = db.Column(db.String(200), unique=True)
+    fourthSection_CardTwoText = db.Column(db.String(200), unique=True)
+    fourthSection_CardTwo_Person = db.Column(db.String(200), unique=True)
+    fourthSection_CardThreeText = db.Column(db.String(200), unique=True)
+    fourthSection_CardThree_Person = db.Column(db.String(200), unique=True)
 
     def __repr__(self):
         return '<User %r>' % self.user_id
