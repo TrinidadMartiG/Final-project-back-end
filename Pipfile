@@ -9,6 +9,7 @@ flask = "*"
 flask-cors = "*"
 flask-migrate = "*"
 migrate = "*"
+flask-jwt-extended = "*"
 
 [dev-packages]
 

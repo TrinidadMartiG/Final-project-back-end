@@ -3,8 +3,17 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from models import db, User, Media, Text_FirstSection, Text_SecondSection, Text_ThirdSection, Text_FourthSection
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+import datetime
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
+#pasamos app a jwt 
+app.config["JWT_SECRET_KEY"] = "super-secret"
+jwt = JWTManager(app)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///final-project.db"
 db.init_app(app)
 CORS(app)
@@ -17,7 +26,22 @@ def hello():
 
 @app.route("/login", methods=['POST'])
 def login():
-    return jsonify(serialize_list), 201
+    body = request.get_json()
+    one = User.query.filter_by(email = body["email"], password= body["password"]).first()
+    if(not one):
+        return 'Usuario y/o contraseña incorrectos'
+    else:
+        expire = datetime.timedelta(hours=1)
+        access = create_access_token(identity=body["email"], expires_delta=expire)
+        return  jsonify(
+        {
+            "login": "ok",
+            "token": access,
+            "tiempo": expire.total_seconds(),
+        })
+
+    print(body)
+    return 'ok'
 
 @app.route("/users", methods=['GET'])
 def get_all_users():
@@ -28,6 +52,8 @@ def get_all_users():
     }
 
     return jsonify(serialize_list), 201
+
+#agregar ruta registro
 
 @app.route("/create_user", methods=["POST"])
 def create_user():
